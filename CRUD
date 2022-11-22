@@ -8,7 +8,7 @@ import pandas as pd
 import plotly.express as px
 
 app = dash.Dash(__name__)
-
+app.server.config["SQLALCHEMY_DATABASE_URI"] = "postgresql://postgres:postgres_admin@localhost/test"
 app.layout = html.Div([
     html.Div([
         dcc.Input(
@@ -22,20 +22,11 @@ app.layout = html.Div([
 
     dash_table.DataTable(
         id='our-table',
-        columns=[{'name': 'Product', 'id': 'Product', 'deletable': False, 'renamable': False},
-                 {'name': 'Version', 'id': 'Version', 'deletable': True, 'renamable': True},
-                 {'name': 'Price', 'id': 'Price', 'deletable': True, 'renamable': True},
-                 {'name': 'Sales', 'id': 'Sales', 'deletable': False, 'renamable': False}],
-        data=[{'Product': 'Iphone', 'Version': '6a', 'Price': 799, 'Sales': 2813},
-              {'Product': 'Iphone', 'Version': '9', 'Price': 900, 'Sales': 5401},
-              {'Product': 'Iphone', 'Version': '7', 'Price': 799, 'Sales': 2513},
-              {'Product': 'Iphone', 'Version': '8', 'Price': 850, 'Sales': 5401},
-              {'Product': 'Galaxy', 'Version': 'S9', 'Price': 900, 'Sales': 6084},
-              {'Product': 'Galaxy', 'Version': 'S10', 'Price': 1000, 'Sales': 7084},
-              {'Product': 'Galaxy', 'Version': 'S20', 'Price': 1200, 'Sales': 9084},
-              {'Product': 'Pixel', 'Version': '1', 'Price': 400, 'Sales': 2084},
-              {'Product': 'Pixel', 'Version': '2', 'Price': 500, 'Sales': 3033},
-              {'Product': 'Pixel', 'Version': '3', 'Price': 600, 'Sales': 6000}],
+        columns=[{'name': 'id', 'id': 'Product', 'deletable': False, 'renamable': False},
+                 {'name': 'brand', 'id': 'Version', 'deletable': True, 'renamable': True},
+                 {'name': 'model', 'id': 'Price', 'deletable': True, 'renamable': True},
+                 {'name': 'price', 'id': 'Sales', 'deletable': False, 'renamable': False}],
+        data=[{'Product': '1', 'Version': 'Honda', 'Price': 'Accord','Sales':'150'}],
         editable=True,                  # allow user to edit data inside tabel
         row_deletable=True,             # allow user to delete rows
         sort_action="native",           # give user capability to sort columns
